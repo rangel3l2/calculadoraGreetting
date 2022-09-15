@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tads.projetoaula.model.Resultado;
 import com.tads.projetoaula.model.Soma;
+import com.tads.projetoaula.service.SomaService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 
@@ -17,26 +19,28 @@ import org.springframework.http.HttpStatus;
 @RestController
 @RequestMapping(value = "calculator")
 public class SomaController {
+        @Autowired
+        SomaService somaService;
 
-
-    @GetMapping(value = "/{numb1}/{numb2}") 
-    public Float GetSoma(@PathVariable Float numb1, @PathVariable Float  numb2)
-        {
+    @GetMapping(value = "/{num1}/{num2}") 
+    public Resultado GetSoma(@PathVariable Float num1, @PathVariable Float  num2)
+        {   
+           
             Soma soma= new Soma();
-            
-        return soma.somar(numb1, numb2);
+            soma.setNum1(num1);
+            soma.setNum2(num2);
+
+        return somaService.somarNum(soma);
 
         }
    
      // Método POST com Body Params
      @PostMapping(value = "/")
      @ResponseStatus(HttpStatus.CREATED) // É possível predeterminar todos os Status Code lançados por um método
-     public Resultado operacao(@RequestBody Soma soma) {
-        Resultado resultado  = new Resultado();
-        resultado.setResultado(soma.getNum1() + soma.getNum2());
+     public Resultado operacao(@RequestBody Soma soma) {    
+    //a instancia soma possue o valor que é enviado via post
         
-        
-        return  resultado;
+        return somaService.somarNum(soma) ;
      }
     
 
