@@ -38,6 +38,7 @@ public class SomaController {
      @PostMapping(value = "/")
      @ResponseStatus(HttpStatus.CREATED) // É possível predeterminar todos os Status Code lançados por um método
      public Resultado operacao(@RequestBody Soma soma) {    
+        
     //a instancia soma possue o valor que é enviado via post
         
         return somaService.somarNum(soma) ;
