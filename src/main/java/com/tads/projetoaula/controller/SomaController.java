@@ -35,7 +35,7 @@ public class SomaController {
         }
    
      // Método POST com Body Params
-     @PostMapping(value = "/")
+     @PostMapping()
      @ResponseStatus(HttpStatus.CREATED) // É possível predeterminar todos os Status Code lançados por um método
      public Resultado operacao(@RequestBody Soma soma) {    
         
